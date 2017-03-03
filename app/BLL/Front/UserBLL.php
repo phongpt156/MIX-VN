@@ -9,4 +9,9 @@ class UserBLL
 	{
 		return UserDAL::CheckExistUserPhoneNumber($phone_number);
 	}
+
+	public static function AddUserByPhoneNumber($phone_number, $password)
+	{
+		return UserDAL::AddUserByPhoneNumber($phone_number, $password);
+	}
 }

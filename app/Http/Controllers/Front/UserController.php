@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\BLL\Front\UserBLL;
 use Socialite;
@@ -27,19 +28,30 @@ class UserController extends Controller
         // $user->token;
     }
 
-    public static function CheckExistUserPhoneNumber()
+    public static function CheckExistUserPhoneNumber(Request $request)
     {   
-        $phone_number = $_POST['phone_number'] ?? NULL;
+        $phone_number = $request['phonenumber_register'];
         if(UserBLL::CheckExistUserPhoneNumber($phone_number))
-            return "false";
-        return "true";
+            return 'false';
+        return 'true';
     }
 
-    public static function AddUserByPhoneNumber()
+    public static function AddUserByPhoneNumber(Request $request)
     {   
-        $phone_number = $_POST['phonenumber_register'] ?? NULL;
-        $password = $_POST['password_register'] ?? NULL;
+        $phone_number = $request['phonenumber_register'];
+        $password = $request['password_register'];
+        if($phone_number == NULL || $password == NULL)
+            return 0;
+        if(UserBLL::AddUserByPhoneNumber($phone_number, $password))
+        {
+            Auth::attempt(['phone_number' => $phone_number, 'password' => $password]);
+            return back()->with('register_status', 1)->withInput();
+        }
+    }
 
-        return UserBLL::AddUserByPhoneNumber();
-    } 
+    public static function LogOutUser()
+    {
+        Auth::logout();
+        return back();
+    }
 }

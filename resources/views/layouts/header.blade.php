@@ -1,3 +1,33 @@
+@if(session()->has('register_status')) 
+<div class="modal fade" id="success-modal">
+    <div class="modal-dialog" role="document" id="">
+        <div class="success-box">
+            <div class="success-box-container">
+                <div class="success-box-title">
+                    Thông báo
+                </div>
+                <div class="success-box-body">
+                    <div class="success-box-content">
+                        <div>
+                            <h2>Chúc mừng bạn!</h2>
+                            <h3>Bạn đã đăng ký tài khoản thành công</h3>
+                            <p><i>Bạn có thể sử dụng tài khoản này để đăng nhập tất cả sản phẩm của MIX</i></p>
+                            <p>
+                                <strong>Lưu ý: </strong>
+                                <i>Nhấn "Cập nhật" để bổ sung thêm thông tin tài khoản của bạn</i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="success-box-footer">
+                        <a href="" title="" class="btn_L3">Cập nhật</a>
+                        <a href="" title="" class="btn_L5" data-dismiss="modal">Đóng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 <header id="header" class="header">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -10,6 +40,17 @@
 	<div>
 	<nav class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
+			@if(Auth::check())
+			<li class="user-avatar-container dropdown">
+                <a href="" title="" class="nav-acount dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><img src="https://s28.postimg.org/wb2qj4h0t/person1.png" alt="MIX-register">
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="" title="">Trang cá nhân</a></li>
+                    <li><a href="" title="">Cập nhật thông tin</a></li>
+                    <li><a href="{{ route('logout-user') }}" title="">Đăng xuất</a></li>
+                </ul>
+            </li>
+            @else
 			<li>
 				<a href="javascript:void(0)" title="" class="register-user" data-toggle="modal" data-target="#register-box"><img src="http://i.imgur.com/JDTpXUG.png" alt="MIX-register">
 				</a>
@@ -20,6 +61,7 @@
             <li>
             	<a href="" title="" class="user-login"><img src="http://i.imgur.com/XiBWZuO.png" alt="MIX-login"></a>
             </li>
+            @endif
 		</ul>
 	    <ul class="nav navbar-nav navbar-right right-top-nav">
 			<li class="dropdown">

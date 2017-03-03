@@ -20,7 +20,12 @@ Route::group(['prefix' => 'user'], function () {
 	Route::get('auth/facebook/callback', 'Front\UserController@HandleProviderCallback');
 	Route::post('check-exist-user-phonenumber', 'Front\UserController@CheckExistUserPhoneNumber')->name('check-exist-user-phonenumber');
 	Route::post('add-user-by-phonenumber', 'Front\UserController@AddUserByPhoneNumber')->name('add-user-by-phonenumber');
+	Route::get('logout', 'Front\UserController@LogOutUser')->name('logout-user');
 });
 
 Route::get('test', 'Front\UserController@CheckExistUserPhoneNumber');
-Route::get('add-user-by-phonenumber', 'Front\UserController@AddUserByPhoneNumber')->name('add-user-by-phonenumber');
+Route::get('add-user-by-phonenumber', 'Front\UserController@AddUserByPhoneNumber');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

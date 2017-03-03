@@ -6,6 +6,11 @@ $(document).ready(function() {
 		    	keyboard: 'static',
 		    	backdrop: true
 		    });
+		    $("#success-modal").modal({
+		    	show: true,
+		    	keyboard: 'static',
+		    	backdrop: true
+		    })
 		    $(".phone-register").on("click", function() {
 		    	$(".phone-number-register-box").toggle();
 		    	$(".gmail-register").toggle();
